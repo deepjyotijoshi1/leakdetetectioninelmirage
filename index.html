@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leak Detection in El Mirage, AZ | leakdetectioninelmirage</title>
+    <meta name="description" content="Professional leak detection and plumbing services in El Mirage, AZ. Specializing in hidden leaks, slab leaks, and underground water line detection.">
+    
+    <!-- Core Web Vitals Optimization: Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- React & Babel -->
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#0a192f',
+                        primaryBlue: '#1e3a8a',
+                        teal: '#0d9488',
+                        lightGray: '#f9fafb'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Semantic Entity SEO: LocalBusiness Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "PlumbingService",
+      "name": "leakdetectioninelmirage",
+      "image": "https://www.example.com/logo.png",
+      "@id": "https://www.example.com",
+      "url": "https://www.example.com",
+      "telephone": "+18447481028",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "12831 W Desert Cove Rd",
+        "addressLocality": "El Mirage",
+        "addressRegion": "AZ",
+        "postalCode": "85335",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "El Mirage"
+        },
+        {
+          "@type": "County",
+          "name": "Maricopa County"
+        }
+      ],
+      "department": {
+        "@type": "LocalBusiness",
+        "name": "Leak Detection Services"
+      }
+    }
+    </script>
+</head>
+<body class="bg-lightGray text-gray-800 font-sans antialiased">
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // --- REUSABLE COMPONENTS ---
+
+        const Header = ({ currentRoute, navigate }) => {
+            const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+            const navLinks = [
+                { path: '/', label: 'Home' },
+                { path: '/leak-detection', label: 'Leak Detection' },
+                { path: '/slab-leak-detection', label: 'Slab Leaks' },
+                { path: '/service-areas/el-mirage-az', label: 'El Mirage Area' }
+            ];
+
+            return (
+                <header class="bg-navy text-white sticky top-0 z-50 shadow-md">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex justify-between items-center h-20">
+                            {/* Logo */}
+                            <div class="flex-shrink-0 cursor-pointer" onClick={() => navigate('/')}>
+                                <span class="font-bold text-2xl tracking-tight">leakdetectioninelmirage</span>
+                            </div>
+                            
+                            {/* Desktop Nav */}
+                            <nav class="hidden md:flex space-x-8">
+                                {navLinks.map(link => (
+                                    <button 
+                                        key={link.path} 
+                                        onClick={() => navigate(link.path)}
+                                        class={`text-sm font-medium hover:text-teal transition-colors ${currentRoute === link.path ? 'text-teal' : 'text-gray-200'}`}
+                                    >
+                                        {link.label}
+                                    </button>
+                                ))}
+                            </nav>
+
+                            {/* CTA */}
+                            <div class="hidden md:flex items-center">
+                                <a href="tel:+18447481028" class="bg-teal hover:bg-teal-600 text-white px-6 py-2 rounded font-bold transition-colors shadow-lg flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                                    Call: (844) 748-1028
+                                </a>
+                            </div>
+
+                            {/* Mobile menu button */}
+                            <div class="md:hidden flex items-center">
+                                <button onClick={() => setMobileMenuOpen(!mobileMenuOpen)} class="text-gray-200 hover:text-white" aria-label="Toggle Menu">
+                                    <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d={mobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Mobile Menu */}
+                    {mobileMenuOpen && (
+                        <div class="md:hidden bg-primaryBlue">
+                            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                                {navLinks.map(link => (
+                                    <button 
+                                        key={link.path}
+                                        onClick={() => { navigate(link.path); setMobileMenuOpen(false); }}
+                                        class="block px-3 py-2 rounded-md text-base font-medium w-full text-left text-white hover:bg-navy"
+                                    >
+                                        {link.label}
+                                    </button>
+                                ))}
+                                <a href="tel:+18447481028" class="block w-full text-center bg-teal text-white font-bold px-4 py-3 mt-4 rounded">
+                                    Call for Leak Detection
+                                </a>
+                            </div>
+                        </div>
+                    )}
+                </header>
+            );
+        };
+
+        const Footer = () => (
+            <footer class="bg-navy text-gray-300 py-12 mt-16 border-t border-gray-700">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div>
+                        <h3 class="text-white text-lg font-bold mb-4">leakdetectioninelmirage</h3>
+                        <p class="mb-2 flex items-start">
+                            <svg class="w-5 h-5 mr-2 text-teal mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                            12831 W Desert Cove Rd<br/>El Mirage, AZ 85335<br/>United States
+                        </p>
+                        <p class="flex items-center mt-4">
+                            <svg class="w-5 h-5 mr-2 text-teal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            <a href="tel:+18447481028" class="hover:text-white font-bold">+1 (844) 748-1028</a>
+                        </p>
+                    </div>
+                    <div>
+                        <h3 class="text-white text-lg font-bold mb-4">Core Services</h3>
+                        <ul class="space-y-2">
+                            <li><span class="hover:text-teal cursor-pointer">Leak Detection</span></li>
+                            <li><span class="hover:text-teal cursor-pointer">Slab Leak Detection</span></li>
+                            <li><span class="hover:text-teal cursor-pointer">Underground Water Leaks</span></li>
+                            <li><span class="hover:text-teal cursor-pointer">Hidden Plumbing Leaks</span></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-white text-lg font-bold mb-4">Service Area</h3>
+                        <p class="mb-4">Providing professional leak detection and plumbing services to El Mirage, Maricopa County, and the surrounding West Valley communities.</p>
+                        <a href="tel:+18447481028" class="inline-block bg-teal hover:bg-teal-600 text-white px-6 py-2 rounded font-bold transition-colors">
+                            Request an Inspection
+                        </a>
+                    </div>
+                </div>
+                <div class="max-w-7xl mx-auto px-4 mt-8 pt-8 border-t border-gray-700 text-sm text-center">
+                    &copy; {new Date().getFullYear()} leakdetectioninelmirage. All rights reserved.
+                </div>
+            </footer>
+        );
+
+        const Breadcrumbs = ({ crumbs, navigate }) => (
+            <nav class="flex text-sm text-gray-500 mb-6" aria-label="Breadcrumb">
+                <ol class="inline-flex items-center space-x-1 md:space-x-3">
+                    <li class="inline-flex items-center">
+                        <button onClick={() => navigate('/')} class="hover:text-primaryBlue">Home</button>
+                    </li>
+                    {crumbs.map((crumb, index) => (
+                        <li key={index}>
+                            <div class="flex items-center">
+                                <svg class="w-4 h-4 text-gray-400 mx-1" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd"></path></svg>
+                                {index === crumbs.length - 1 ? (
+                                    <span class="text-gray-700 font-medium ml-1 md:ml-2">{crumb.label}</span>
+                                ) : (
+                                    <button onClick={() => navigate(crumb.path)} class="hover:text-primaryBlue ml-1 md:ml-2">{crumb.label}</button>
+                                )}
+                            </div>
+                        </li>
+                    ))}
+                </ol>
+            </nav>
+        );
+
+        const EmergencyCTA = () => (
+            <section class="bg-primaryBlue text-white py-12 px-4 text-center mt-12 rounded-lg shadow-xl max-w-5xl mx-auto">
+                <h2 class="text-3xl font-bold mb-4">Suspect a Hidden Water Leak?</h2>
+                <p class="mb-6 text-lg max-w-2xl mx-auto">Unresolved plumbing leaks can lead to costly foundation issues, mold, and high water bills. Act quickly to locate the source.</p>
+                <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <a href="tel:+18447481028" class="bg-teal hover:bg-teal-500 text-white font-bold py-3 px-8 rounded-lg shadow-lg text-lg transition-transform hover:scale-105">
+                        Call for Leak Detection
+                    </a>
+                </div>
+            </section>
+        );
+
+        const Home = ({ navigate }) => (
+            <main>
+                {/* Hero */}
+                <section class="relative bg-navy text-white py-20 px-4">
+                    <div class="absolute inset-0 overflow-hidden opacity-20">
+                         <div class="w-full h-full bg-gradient-to-r from-blue-900 to-teal-900"></div>
+                    </div>
+                    <div class="relative max-w-4xl mx-auto text-center z-10">
+                        <h1 class="text-4xl md:text-5xl font-extrabold tracking-tight mb-6 leading-tight">
+                            Leak Detection & Plumbing Services in El Mirage, AZ
+                        </h1>
+                        <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto">
+                            Professional identification of hidden plumbing leaks, slab leaks, and underground water line issues before they cause costly damage.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
+                            <a href="tel:+18447481028" class="bg-teal hover:bg-teal-500 text-white font-bold py-4 px-8 rounded shadow-lg text-lg transition-transform hover:scale-105">
+                                Call for Leak Detection
+                            </a>
+                            <button onClick={() => navigate('/service-areas/el-mirage-az')} class="bg-transparent border-2 border-white hover:bg-white hover:text-navy text-white font-bold py-4 px-8 rounded transition-colors text-lg">
+                                View Local Services
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                {/* Core Services Grid */}
+                <section class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl font-bold text-navy mb-4">Targeted Leak Detection Solutions</h2>
+                        <p class="text-gray-600 max-w-2xl mx-auto">We utilize specialized equipment to pinpoint water leaks precisely, minimizing property disruption and expediting the repair process.</p>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-teal hover:shadow-xl transition-shadow cursor-pointer" onClick={() => navigate('/leak-detection')}>
+                            <h3 class="text-xl font-bold text-navy mb-3">Hidden Water Leaks</h3>
+                            <p class="text-gray-600 mb-4">Detecting leaks concealed behind walls, inside ceilings, and under flooring using non-invasive diagnostic tools.</p>
+                            <span class="text-teal font-semibold">Learn More &rarr;</span>
+                        </div>
+                        <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-primaryBlue hover:shadow-xl transition-shadow cursor-pointer" onClick={() => navigate('/slab-leak-detection')}>
+                            <h3 class="text-xl font-bold text-navy mb-3">Slab Leak Detection</h3>
+                            <p class="text-gray-600 mb-4">Pinpointing pressurized plumbing leaks located beneath your home's concrete foundation to prevent structural damage.</p>
+                            <span class="text-primaryBlue font-semibold">Learn More &rarr;</span>
+                        </div>
+                        <div class="bg-white p-8 rounded-lg shadow-md border-t-4 border-navy hover:shadow-xl transition-shadow">
+                            <h3 class="text-xl font-bold text-navy mb-3">Underground Water Lines</h3>
+                            <p class="text-gray-600 mb-4">Locating main water service line leaks buried under landscaping, driveways, or soil to stop unexplained water loss.</p>
+                            <span class="text-navy font-semibold">Request Inspection &rarr;</span>
+                        </div>
+                    </div>
+                </section>
+
+                <EmergencyCTA />
+            </main>
+        );
+
+        const LeakDetection = ({ navigate }) => (
+            <main class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white mt-8 rounded-lg shadow-sm">
+                <Breadcrumbs crumbs={[{ label: 'Leak Detection', path: '/leak-detection' }]} navigate={navigate} />
+                
+                <h1 class="text-4xl font-extrabold text-navy mb-6">Leak Detection in El Mirage, AZ</h1>
+                
+                <div class="prose max-w-none text-gray-700 space-y-6 text-lg">
+                    <p class="lead font-medium text-xl text-gray-800">
+                        A hidden water leak can cause progressive damage to your home’s structure, foundation, and drywall while significantly inflating your monthly utility bill. Our professional leak detection services in El Mirage are designed to locate the exact source of hidden moisture.
+                    </p>
+                    
+                    <h2 class="text-2xl font-bold text-navy mt-8 mb-4">Common Signs of a Hidden Plumbing Leak</h2>
+                    <ul class="list-disc pl-6 space-y-2">
+                        <li><strong>Unexplained Water Bill Spikes:</strong> Consistent increases in usage without a change in household habits.</li>
+                        <li><strong>Water Meter Activity:</strong> The indicator continues moving even when all fixtures and appliances are turned off.</li>
+                        <li><strong>Audible Running Water:</strong> Hearing water flowing through pipes when nothing is in use.</li>
+                        <li><strong>Moisture and Discoloration:</strong> Unexplained wet spots on drywall, bubbling paint, or warping baseboards.</li>
+                        <li><strong>Musty Odors:</strong> A persistent damp smell often associated with hidden moisture buildup.</li>
+                    </ul>
+
+                    <div class="bg-lightGray p-6 border-l-4 border-teal my-8">
+                        <h3 class="font-bold text-lg mb-2">Why Professional Detection Matters</h3>
+                        <p>Attempting to locate a leak through trial and error (often called "search and destroy") requires damaging drywall or flooring. Professional leak detection utilizes acoustic equipment, thermal imaging, and pressure testing to pinpoint the issue non-invasively.</p>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-navy mt-8 mb-4">What Happens After a Leak is Located?</h2>
+                    <p>
+                        Once our technicians isolate the exact location of the plumbing leak, we provide a clear explanation of the problem and outline the most effective repair options. Whether it requires targeted pipe replacement, rerouting a water line, or accessing a concealed fitting, you will have the diagnostic information needed to proceed confidently.
+                    </p>
+
+                    <div class="mt-12 text-center">
+                        <a href="tel:+18447481028" class="inline-block bg-teal hover:bg-teal-600 text-white font-bold py-4 px-10 rounded-lg shadow-md text-xl transition-colors">
+                            Request a Leak Inspection Today
+                        </a>
+                    </div>
+                </div>
+            </main>
+        );
+
+        const SlabLeak = ({ navigate }) => (
+            <main class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white mt-8 rounded-lg shadow-sm">
+                <Breadcrumbs crumbs={[{ label: 'Slab Leak Detection', path: '/slab-leak-detection' }]} navigate={navigate} />
+                
+                <h1 class="text-4xl font-extrabold text-navy mb-6">Slab Leak Detection in El Mirage, AZ</h1>
+                
+                <div class="prose max-w-none text-gray-700 space-y-6 text-lg">
+                    <p>
+                        A slab leak occurs when the water lines running beneath your home's concrete foundation develop a pinhole leak or break. Because these pipes are encased in or buried directly below concrete, locating the exact source requires specialized acoustic and diagnostic equipment.
+                    </p>
+                    
+                    <h2 class="text-2xl font-bold text-navy mt-8 mb-4">Symptoms of a Plumbing Leak Under Concrete</h2>
+                    <div class="grid sm:grid-cols-2 gap-6 my-6">
+                        <div class="border border-gray-200 p-5 rounded">
+                            <h4 class="font-bold text-primaryBlue flex items-center mb-2">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M11.3 1.046A12.014 12.014 0 0010.337 1a12.013 12.013 0 00-11.895 10.963 10.016 10.016 0 008.204 10.963A12.014 12.014 0 0010.337 23a12.013 12.013 0 0011.895-10.963 10.016 10.016 0 00-8.204-10.963zM10.337 3a10.013 10.013 0 018.91 5.926 8.016 8.016 0 01-6.563 8.77A10.014 10.014 0 0110.337 21a10.013 10.013 0 01-8.91-5.926 8.016 8.016 0 016.563-8.77A10.014 10.014 0 0110.337 3z" clipRule="evenodd"></path></svg>
+                                Unexpected Warm Flooring
+                            </h4>
+                            <p class="text-sm">Hot water line leaks often radiate heat upwards, creating noticeably warm spots on tile or hardwood floors.</p>
+                        </div>
+                        <div class="border border-gray-200 p-5 rounded">
+                            <h4 class="font-bold text-primaryBlue flex items-center mb-2">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
+                                Decreased Water Pressure
+                            </h4>
+                            <p class="text-sm">A significant breach in the underground supply line can reduce the overall water pressure at your faucets.</p>
+                        </div>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-navy mt-8 mb-4">Our Detection Process</h2>
+                    <p>
+                        We do not break concrete to "search" for a leak. Instead, we perform pressure isolation testing to determine which specific line (hot or cold) is compromised. Then, we use highly sensitive acoustic equipment to listen for the specific frequency of escaping water through the slab, isolating the exact location of the failure.
+                    </p>
+
+                    <EmergencyCTA />
+                </div>
+            </main>
+        );
+
+        const ElMirageLocation = ({ navigate }) => (
+            <main class="max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8 bg-white mt-8 rounded-lg shadow-sm">
+                <Breadcrumbs crumbs={[
+                    { label: 'Service Areas', path: '/' },
+                    { label: 'El Mirage, AZ', path: '/service-areas/el-mirage-az' }
+                ]} navigate={navigate} />
+                
+                <h1 class="text-4xl font-extrabold text-navy mb-6">Plumbing & Leak Detection in El Mirage, AZ</h1>
+                
+                <div class="prose max-w-none text-gray-700 space-y-6 text-lg">
+                    <p>
+                        Based in Maricopa County, the hard water common to El Mirage and the West Valley can significantly reduce the lifespan of residential plumbing pipes. Mineral buildup and fluctuating ground temperatures make homes in this area particularly susceptible to pinhole pipe leaks, slab leaks, and water heater failures.
+                    </p>
+
+                    <div class="bg-navy text-white p-8 rounded-lg my-8">
+                        <h2 class="text-2xl font-bold mb-4 text-white">Local Services Available in El Mirage</h2>
+                        <ul class="grid sm:grid-cols-2 gap-4">
+                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-teal" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> Residential Leak Detection</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-teal" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> Slab Leak Location</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-teal" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> Underground Water Lines</li>
+                            <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-teal" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg> Emergency Plumbing Diagnostics</li>
+                        </ul>
+                    </div>
+
+                    <h2 class="text-2xl font-bold text-navy mt-8 mb-4">Dedicated to the West Valley</h2>
+                    <p>
+                        Because we operate locally out of 12831 W Desert Cove Rd, our technicians understand the specific architectural styles and plumbing infrastructure common to El Mirage neighborhoods. Whether you are dealing with a sudden spike in your water bill or unexplained moisture pooling in your yard, we provide transparent, accurate diagnostics.
+                    </p>
+
+                    <div class="mt-8">
+                        <button onClick={() => navigate('/leak-detection')} class="text-primaryBlue font-bold hover:underline">
+                            &larr; View Core Leak Detection Services
+                        </button>
+                    </div>
+                </div>
+            </main>
+        );
+
+        const App = () => {
+            const [currentRoute, setCurrentRoute] = useState('/');
+
+            // Document Title SEO Management
+            useEffect(() => {
+                const titles = {
+                    '/': 'Leak Detection & Plumbing Services in El Mirage, AZ | leakdetectioninelmirage',
+                    '/leak-detection': 'Leak Detection in El Mirage, AZ | leakdetectioninelmirage',
+                    '/slab-leak-detection': 'Slab Leak Detection in El Mirage, AZ | leakdetectioninelmirage',
+                    '/service-areas/el-mirage-az': 'Plumbing & Leak Detection in El Mirage, AZ | leakdetectioninelmirage'
+                };
+                document.title = titles[currentRoute] || 'leakdetectioninelmirage';
+                window.scrollTo(0, 0);
+            }, [currentRoute]);
+
+            const renderRoute = () => {
+                switch(currentRoute) {
+                    case '/': return <Home navigate={setCurrentRoute} />;
+                    case '/leak-detection': return <LeakDetection navigate={setCurrentRoute} />;
+                    case '/slab-leak-detection': return <SlabLeak navigate={setCurrentRoute} />;
+                    case '/service-areas/el-mirage-az': return <ElMirageLocation navigate={setCurrentRoute} />;
+                    default: return <Home navigate={setCurrentRoute} />;
+                }
+            };
+
+            return (
+                <div class="min-h-screen flex flex-col font-sans text-gray-900 bg-gray-50">
+                    <Header currentRoute={currentRoute} navigate={setCurrentRoute} />
+                    <div class="flex-grow">
+                        {renderRoute()}
+                    </div>
+                    <Footer />
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html>
